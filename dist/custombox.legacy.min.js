@@ -1,6 +1,6 @@
 /*
  *  custombox - Modal dialog effects with transitions CSS3
- *  version: 4.0.5
+ *  version: 4.0.6
  *  http://dixso.github.io/custombox/
  *  (c) 2020 Julio de la Calle - @dixso9
  *
