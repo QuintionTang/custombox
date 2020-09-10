@@ -1,157 +1,207 @@
-'use strict';
-module.exports = function(grunt) {
-  require('time-grunt')(grunt);
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+"use strict";
+module.exports = function (grunt) {
+  require("time-grunt")(grunt);
+  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON("package.json"),
 
-    header: '/*\n *  <%= pkg.name %> - <%= pkg.description %>\n' +
-    ' *  version: <%= pkg.version %>\n' +
-    ' *  http://dixso.github.io/custombox/\n' +
-    ' *  (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> - @dixso9\n' +
-    ' *\n',
+    header:
+      "/*\n *  <%= pkg.name %> - <%= pkg.description %>\n" +
+      " *  version: <%= pkg.version %>\n" +
+      " *  http://dixso.github.io/custombox/\n" +
+      ' *  (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> - @dixso9\n' +
+      " *\n",
 
-    License: ' *  Under MIT License - http://opensource.org/licenses/MIT\n' + ' */\n',
+    License:
+      " *  Under MIT License - http://opensource.org/licenses/MIT\n" + " */\n",
 
-    banner: '<%= header %>' + '<%= License %>',
+    banner: "<%= header %>" + "<%= License %>",
 
-    legacy: '<%= header %>' +
-    ' *  babel-polyfill - https://www.npmjs.com/package/babel-polyfill\n' +
-    ' *  babel-plugin-transform-object-assign - https://www.npmjs.com/package/babel-plugin-transform-object-assign\n' +
-    ' *  es6-promise - https://www.npmjs.com/package/es6-promise\n' +
-    ' *  custom-event-polyfill - https://www.npmjs.com/package/custom-event-polyfill\n' +
-    ' *  fullscreen-api-polyfill - https://www.npmjs.com/package/fullscreen-api-polyfill\n' +
-    ' *\n' +
-    '<%= License %>',
+    legacy:
+      "<%= header %>" +
+      " *  babel-polyfill - https://www.npmjs.com/package/babel-polyfill\n" +
+      " *  babel-plugin-transform-object-assign - https://www.npmjs.com/package/babel-plugin-transform-object-assign\n" +
+      " *  es6-promise - https://www.npmjs.com/package/es6-promise\n" +
+      " *  custom-event-polyfill - https://www.npmjs.com/package/custom-event-polyfill\n" +
+      " *  fullscreen-api-polyfill - https://www.npmjs.com/package/fullscreen-api-polyfill\n" +
+      " *\n" +
+      "<%= License %>",
 
     browserSync: {
       bsFiles: {
-        src : [
-          'src/*.js',
-          'src/*.css',
-          'src/*.html',
-        ]
+        src: ["src/*.js", "src/*.css", "src/*.html"],
       },
       options: {
         server: {
-          baseDir: './src'
-        }
-      }
+          baseDir: "./src",
+        },
+      },
     },
     babel: {
       dist: {
         options: {
-          presets: ['es2015'],
-          plugins: ['transform-object-assign']
+          presets: ["es2015"],
+          plugins: ["transform-object-assign"],
         },
         files: {
-          'dist/built/custombox.js': 'src/custombox.js'
-        }
-      }
+          "dist/built/custombox_2015.js": "dist/built/custombox.js",
+        },
+      },
     },
     uglify: {
       dist: {
+        options: {
+          mangle: false,
+        },
         files: {
-          'dist/custombox.min.js': ['dist/built/custombox.js']
-        }
+          "./dist/custombox.min.js": ["./dist/built/custombox_2015.js"],
+        },
       },
       legacy: {
         options: {
-          mangle: false
+          mangle: false,
         },
         files: {
-          'dist/custombox.legacy.min.js': ['dist/built/custombox.legacy.min.js']
-        }
-      }
+          "dist/custombox.legacy.min.js": [
+            "dist/built/custombox.legacy.min.js",
+          ],
+        },
+      },
     },
     concat: {
       dist: {
         options: {
-          stripBanners: true
+          stripBanners: true,
         },
         src: [
-          './node_modules/babel-polyfill/dist/polyfill.min.js',
-          './node_modules/custom-event-polyfill/custom-event-polyfill.js',
-          './node_modules/es6-promise/dist/es6-promise.auto.min.js',
-          './node_modules/fullscreen-api-polyfill/fullscreen-api-polyfill.min.js',
+          "./node_modules/babel-polyfill/dist/polyfill.min.js",
+          "./node_modules/custom-event-polyfill/custom-event-polyfill.js",
+          "./node_modules/es6-promise/dist/es6-promise.auto.min.js",
+          "./node_modules/fullscreen-api-polyfill/fullscreen-api-polyfill.min.js",
         ],
-        dest: 'dist/built/custombox.legacy.min.js',
+        dest: "dist/built/custombox.legacy.min.js",
       },
     },
     clean: {
       start: {
-        src: ['dist/']
+        src: ["dist/"],
       },
       end: {
-        src: ['dist/built']
-      }
+        src: ["dist/built"],
+      },
     },
     autoprefixer: {
       options: {
-        browsers: ['last 2 versions', 'ie 8', 'ie 9']
+        browsers: ["last 2 versions", "ie 8", "ie 9"],
       },
       dist: {
-        src: ['src/*.css'],
-        dest: 'dist/built/custombox.css',
-      }
+        src: ["src/*.css"],
+        dest: "dist/built/custombox.css",
+      },
     },
     cssmin: {
       dist: {
         files: {
-          'dist/custombox.min.css': ['dist/built/custombox.css']
-        }
-      }
+          "dist/custombox.min.css": ["dist/built/custombox.css"],
+        },
+      },
     },
     usebanner: {
       dist: {
         options: {
-          position: 'top',
-          banner: '<%= banner %>',
+          position: "top",
+          banner: "<%= banner %>",
           linebreak: false,
         },
         files: {
-          src: ['dist/custombox.min.*']
-        }
+          src: ["dist/custombox.min.*"],
+        },
       },
       legacy: {
         options: {
-          position: 'top',
-          banner: '<%= legacy %>',
+          position: "top",
+          banner: "<%= legacy %>",
           linebreak: false,
         },
         files: {
-          src: ['dist/custombox.legacy.*']
-        }
-      }
+          src: ["dist/custombox.legacy.*"],
+        },
+      },
     },
     bump: {
       options: {
-        files: ['package.json', 'bower.json', 'dist/custombox.*'],
-        commitFiles: ['package.json', 'bower.json', 'dist/*'],
-        tagName: '%VERSION%',
-        prereleaseName: 'rc',
-        pushTo: 'origin',
+        files: ["package.json", "bower.json", "dist/custombox.*"],
+        commitFiles: ["package.json", "bower.json", "dist/*"],
+        tagName: "%VERSION%",
+        prereleaseName: "rc",
+        pushTo: "origin",
         push: true,
-      }
+      },
+    },
+    sass: {
+      options: {
+        style: "compressed",
+        sourcemap: "none",
+      },
+      dist: {
+        files: {
+          "./dist/built/custombox.css": "./src/custombox.scss",
+        },
+      },
+    },
+    ts: {
+      default: {
+        src: ["./src/*.ts", "!./src/*.spec.ts"],
+        out: "./dist/built/custombox.js",
+        tsconfig: "./tsconfig.json",
+        options: {
+          sourceMap: false,
+        },
+      },
     },
     fixpack: {
       dist: {
-        src: ['package.json', 'bower.json'],
+        src: ["package.json", "bower.json"],
       },
     },
   });
 
-  let target = grunt.option('target') ? `:${grunt.option('target')}` : '';
-  grunt.registerTask('dist', ['clean:start', 'babel:dist', 'uglify:dist', 'autoprefixer:dist', 'cssmin:dist', 'concat:dist', 'uglify:legacy', 'usebanner', 'clean:end']);
-  grunt.registerTask('release', ['dist', 'update:bower', 'fixpack:dist', `bump${target}`]);
+  let target = grunt.option("target") ? `:${grunt.option("target")}` : "";
+  grunt.registerTask("dist", [
+    "clean:start",
+    "sass:dist",
+    "ts:default",
+    "babel:dist",
+    "uglify:dist",
+    "autoprefixer:dist",
+    "cssmin:dist",
+    "concat:dist",
+    "uglify:legacy",
+    "usebanner",
+    "clean:end",
+  ]);
+  grunt.registerTask("release", [
+    "dist",
+    "update:bower",
+    "fixpack:dist",
+    `bump${target}`,
+  ]);
 
-  grunt.registerTask('update:bower', () => {
-    const files = ['bower.json'];
-    const pkg = grunt.file.readJSON('package.json');
-    const replace = ['version', 'description', 'name', 'homepage', 'license', 'author', 'repository'];
+  grunt.registerTask("update:bower", () => {
+    const files = ["bower.json"];
+    const pkg = grunt.file.readJSON("package.json");
+    const replace = [
+      "version",
+      "description",
+      "name",
+      "homepage",
+      "license",
+      "author",
+      "repository",
+    ];
 
-    for (let e = 0, te = files.length; e < te; e ++) {
+    for (let e = 0, te = files.length; e < te; e++) {
       let project = grunt.file.readJSON(files[e]);
       if (!grunt.file.exists(files[e])) {
         grunt.log.error(`file ${files[e]} not found`);

@@ -7,3 +7,5 @@ src/*.html
 npm-debug.log
 node_modules/
 coverage/
+.sass-cache
+package-lock.json

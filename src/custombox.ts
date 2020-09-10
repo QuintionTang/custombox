@@ -4,12 +4,12 @@ namespace Custombox {
     content: ContentSchema;
     loader: LoaderSchema;
   }
-
   interface OverlaySchema extends Speed, Callback {
     color: string;
     opacity: number;
     close: boolean;
     active: boolean;
+    zIndex: number;
   }
 
   interface ContentSchema extends Speed, Callback {
@@ -119,6 +119,7 @@ namespace Custombox {
       onOpen: null,
       onComplete: null,
       onClose: null,
+      zIndex: 9997,
       active: true,
     };
     content = {
@@ -281,6 +282,10 @@ namespace Custombox {
     constructor(private options: OptionsSchema) {
       this.element = document.createElement('div');
       this.element.style.backgroundColor = this.options.overlay.color;
+      if (this.options.overlay.zIndex){
+        this.element.style.zIndex = this.options.overlay.zIndex.toString();
+      }
+      
       this.element.classList.add(`${CB}-overlay`);
       this.setAnimation();
     }
@@ -378,7 +383,10 @@ namespace Custombox {
       if (this.options.content.id) {
         this.element.setAttribute('id', `${CB}-${this.options.content.id}`);
       }
-
+      if (this.options.overlay.zIndex){
+        let z_index = this.options.overlay.zIndex+2;
+        this.element.style.zIndex = z_index.toString();
+      }
       if (!Snippet.check(together, this.options.content.effect)) {
         this.element.style.animationDelay = `${this.options.content.delay}ms`;
       }

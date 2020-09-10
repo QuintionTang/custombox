@@ -6,6 +6,13 @@ Modal dialog effects with transitions CSS3.
 Usage
 -----
 
+Build
+
+```bash
+sudo npm run release
+```
+
+
 You can install custombox through bower:
 
 ```bash
@@ -33,6 +40,11 @@ Optional legacy file for along for the older browsers.
 ## Basic usage
 ```js
 new Custombox.modal({
+  overlay: {
+    color: "#000",  //遮罩层颜色
+    opacity:0.5,    //遮罩层透明度，默认0.48
+    zIndex: 9997    //遮罩层 z-index
+  },
   content: {
     effect: 'fadein',
     target: '#modal'

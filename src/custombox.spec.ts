@@ -240,6 +240,26 @@ describe('Custombox', () => {
       }, 200);
     });
 
+    it('should have put overlay z-index', (done) => {
+      new (Custombox as any).modal({
+        content: {
+          effect: 'fadein',
+          target: '#foo-1',
+        },
+        overlay: {
+          zIndex: 10000,
+        }
+      }).open();
+
+      setTimeout(() => {
+        expect(hasElement('.custombox-overlay')).toBe(true);
+
+        let overlay: any = document.querySelector('.custombox-overlay');
+        expect(overlay.style.zIndex).toEqual(10000);
+        done();
+      }, 200);
+    });
+
     it('should have put overlay opacity', (done) => {
       new (Custombox as any).modal({
         content: {
