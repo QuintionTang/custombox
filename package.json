@@ -1,6 +1,6 @@
 {
-  "name": "custombox",
-  "description": "Modal dialog effects with transitions CSS3",
+  "name": "customboxs",
+  "description": "基于纯Javascript和CSS3构建模态对话框，支持多窗口",
   "version": "4.0.5",
   "author": {
     "name": "Julio de la Calle",
@@ -67,7 +67,7 @@
   "main": "./dist/custombox.min.js",
   "repository": {
     "type": "git",
-    "url": "https://dixso@github.com/dixso/custombox.git"
+    "url": "https://github.com/QuintionTang/custombox"
   },
   "scripts": {
     "lint": "npm run tslint \"src/**/*.ts\"",

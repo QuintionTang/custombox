@@ -1,0 +1,13 @@
+node_modules
+test
+.gitignore
+.editorconfig
+.npmignore
+component.json
+testling.html
+src
+tsconfig.json
+bower.json
+Gruntfile.json
+karma.conf.js
+.travis.yml

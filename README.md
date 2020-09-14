@@ -1,28 +1,17 @@
-Custombox [![npm version](https://badge.fury.io/js/custombox.svg)](https://badge.fury.io/js/custombox) [![Travis](https://travis-ci.org/dixso/custombox.svg?branch=master)](https://travis-ci.org/dixso/custombox) [![Coverage Status](https://coveralls.io/repos/github/dixso/custombox/badge.svg?branch=master)](https://coveralls.io/github/dixso/custombox?branch=master) ![npm License](http://img.shields.io/npm/l/custombox.svg "npm License")
+Customboxs [![npm version](https://badge.fury.io/js/custombox.svg)](https://badge.fury.io/js/custombox) [![Travis](https://travis-ci.org/dixso/custombox.svg?branch=master)](https://travis-ci.org/dixso/custombox) [![Coverage Status](https://coveralls.io/repos/github/dixso/custombox/badge.svg?branch=master)](https://coveralls.io/github/dixso/custombox?branch=master) ![npm License](http://img.shields.io/npm/l/custombox.svg "npm License")
 ==========
 
-Modal dialog effects with transitions CSS3.
+基于纯Javascript和CSS3构建模态对话框，支持多窗口。在开源的基础进行了修改，以支持z-index属性的支持。
+
+期间如有冒犯原创造者，请联系我。
 
 Usage
 -----
 
-Build
+npm:
 
 ```bash
-sudo npm run release
-```
-
-
-You can install custombox through bower:
-
-```bash
-bower install custombox
-```
-
-Or through npm:
-
-```bash
-npm install custombox
+npm install customboxs
 ```
 
 Alternatively, download the package and reference the JavaScript and CSS files manually:
